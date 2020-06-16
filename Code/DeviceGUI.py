@@ -3,12 +3,13 @@ from tkinter import *
 import sys
 import os
 
+# Size of the main window
 master = Tk()
 master.geometry("500x500") 
 
+# Command definitions
 def donothing():
 	x = 0
-
 def callback():
 	print("click!")
 def camera():
@@ -16,6 +17,7 @@ def camera():
 def tag():
 	os.system('python3 Read.py')
 
+# Create seperate window for QR-code or NFC scanning 
 def createWindowQR():
 	newWindow = Toplevel()
 	msg = Message(newWindow, text = "Open QR code stream")
@@ -52,6 +54,7 @@ def createWindowNFC():
 	Terug = Button(newWindow, text = "Startscherm", command = close_window)
 	Terug.grid()
 
+# Button declarations
 b = Button(master, text = "OK", command = callback)
 b.pack()
 
@@ -61,15 +64,19 @@ c.pack()
 n = Button(master, text = "NFC tags", command = createWindowNFC)
 n.pack()
 
-#Menu for choosing what to scan
+# Menu for choosing what to scan
 menubar = Menu(master)
 filemenu = Menu(menubar, tearoff = 0)
 filemenu.add_command(label = "QR-code", command = createWindowQR)
 filemenu.add_command(label = "NFC tag", command = createWindowNFC)
 filemenu.add_separator()
+
+# Exit butoon to close the window
 filemenu.add_command(label = "Exit", command = master.quit)
 menubar.add_cascade(label = "Product", menu = filemenu)
-#Help menu to get information about the device
+
+# Help menu to get information about the device
+# Some buttons still need a command
 helpmenu = Menu(menubar, tearoff = 0)
 helpmenu.add_command(label = "Help Index", command = donothing)
 helpmenu.add_command(label = "About", command = donothing)
